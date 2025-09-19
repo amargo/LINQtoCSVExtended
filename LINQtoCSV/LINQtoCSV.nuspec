@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <projectUrl>http://www.codeproject.com/Articles/25133/LINQ-to-CSV-library</projectUrl>
+    <projectUrl>https://github.com/amargo/LINQtoCSVExtended</projectUrl>
       <iconUrl>http://nuget.org/Media/Default/Packages/LinqToCsv/1.0.0.0/logo.jpg</iconUrl>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <summary>

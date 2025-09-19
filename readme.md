@@ -1,5 +1,11 @@
 # LINQtoCSV
 
+This project is actively developed at: https://github.com/amargo/LINQtoCSVExtended
+
+## Documentation
+
+- Number formatting: [NumberFormatting_EN.md](./docs/NumberFormatting_EN.md)
+
 This library makes it easy to use CSV files with LINQ queries. Its features include:
 
 * Follows the most common rules for CSV files. Correctly handles data fields that contain commas and line breaks.
