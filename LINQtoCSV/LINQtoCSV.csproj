@@ -1,22 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net6.0;net48</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0;net48</TargetFrameworks>
     <AutoGenerateBindingRedirects Condition=" $(TargetFramework.StartsWith('net4')) ">true</AutoGenerateBindingRedirects>
     <LangVersion>latestmajor</LangVersion>
     <Nullable>enable</Nullable>
-    <Version>1.6.4</Version>
+    <Version>1.7.0</Version>
     <Authors>gszobi</Authors>
+    <Copyright>Copyright (c) Matt Perdeck (original LINQtoCSV); Copyright (c) gszobi (LINQtoCSVExtended)</Copyright>
     <PackageId>LINQtoCSVExtended</PackageId>
-    <Description>Popular, easy to use library to read and write CSV and tab delimited files. Supports data fields containing commas and line breaks. Supports different character encodings, separator characters and date and number formats. Robust error handling lets you quickly fix problems in large input files. This is net 6.0 version</Description>
+    <Description>Popular, easy to use library to read and write CSV and tab delimited files. Supports data fields containing commas and line breaks. Supports different character encodings, separator characters and date and number formats. Robust error handling lets you quickly fix problems in large input files.</Description>
     <PackageProjectUrl>https://github.com/amargo/LINQtoCSVExtended</PackageProjectUrl>
     <PackageTags>CSV,LINQ</PackageTags>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <PackageReleaseNotes>Upgrade</PackageReleaseNotes>
+    <PackageReleaseNotes>1.7.0: UseThousandsSeparator=false no longer mutates CultureInfo.CurrentCulture; fixed IndexOutOfRangeException with IgnoreUnknownColumns + EnforceCsvColumnAttribute; AggregatedException rethrown with its original stack trace; targets netstandard2.0, net8.0 and net48 (net6.0 dropped); symbol package and Source Link.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(OutputPath)</PackageOutputPath>
     <RepositoryUrl>https://github.com/amargo/LINQtoCSVExtended</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,10 +37,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="../LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="../docs/NumberFormatting_EN.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>  
+  </ItemGroup>
 
 </Project>
