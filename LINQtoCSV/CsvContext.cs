@@ -185,12 +185,12 @@ namespace LINQtoCSV
                                 obj = fm.ReadObject(row, ae);
                             }
                         }
-                        catch (AggregatedException ae2)
+                        catch (AggregatedException)
                         {
                             // Seeing that the AggregatedException was thrown, maximum number of exceptions
                             // must have been reached, so rethrow.
                             // Catch here, so you don't add an AggregatedException to an AggregatedException
-                            throw ae2;
+                            throw;
                         }
                         catch (Exception e)
                         {
