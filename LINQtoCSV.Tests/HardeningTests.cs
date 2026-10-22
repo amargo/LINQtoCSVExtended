@@ -6,6 +6,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LINQtoCSV.Tests
 {
+    public class TwoColumnRow
+    {
+        [CsvColumn(Name = "A")]
+        public string A { get; set; }
+
+        [CsvColumn(Name = "B")]
+        public string B { get; set; }
+    }
+
     [TestClass]
     public class HardeningTests : Test
     {
@@ -75,6 +84,24 @@ namespace LINQtoCSV.Tests
 
                 Assert.AreEqual(string.Empty, description.FileCultureInfo.NumberFormat.NumberGroupSeparator);
             });
+        }
+
+        [TestMethod]
+        public void Read_IgnoreUnknownColumnsWithEnforceCsvColumnAttribute_MapsKnownColumn()
+        {
+            var description = new CsvFileDescription
+            {
+                SeparatorChar = ',',
+                FirstLineHasColumnNames = true,
+                EnforceCsvColumnAttribute = true,
+                IgnoreUnknownColumns = true,
+                FileCultureInfo = CultureInfo.InvariantCulture
+            };
+
+            var rows = TestRead<TwoColumnRow>("X,Y,Z,B\nx,y,z,b1\nx,y,z,b2\n", description).ToList();
+
+            CollectionAssert.AreEqual(new[] { "b1", "b2" }, rows.Select(r => r.B).ToArray());
+            Assert.IsTrue(rows.All(r => r.A == null));
         }
     }
 }

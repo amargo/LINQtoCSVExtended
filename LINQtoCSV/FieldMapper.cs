@@ -436,7 +436,7 @@ namespace LINQtoCSV
 
                 m_IndexToInfo[_mappingIndexes[i]] = m_NameToInfo[row[i].Value];
 
-                if (m_fileDescription.EnforceCsvColumnAttribute && (!m_IndexToInfo[i].hasColumnAttribute))
+                if (m_fileDescription.EnforceCsvColumnAttribute && (!m_IndexToInfo[_mappingIndexes[i]].hasColumnAttribute))
                 {
                     // enforcing column attr, but this field/prop has no column attr.
                     throw new MissingCsvColumnAttributeException(typeof(T).ToString(), row[i].Value, m_fileName);
