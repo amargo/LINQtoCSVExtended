@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore LINQtoCSV.sln
+
+      - name: Build
+        run: dotnet build LINQtoCSV.sln -c Release --no-restore -p:GeneratePackageOnBuild=false
+
+      - name: Test
+        run: dotnet test LINQtoCSV.Tests/LINQtoCSV.Tests.csproj -c Release --no-build
