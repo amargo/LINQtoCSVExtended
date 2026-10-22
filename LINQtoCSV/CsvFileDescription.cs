@@ -204,6 +204,9 @@ namespace LINQtoCSV
 
             if (!m_useThousandsSeparator && m_cultureInfo != null)
             {
+                // Work on a private copy: the default culture is CultureInfo.CurrentCulture,
+                // which may be read-only or shared by the whole thread.
+                m_cultureInfo = (CultureInfo)m_cultureInfo.Clone();
                 string decimalSeparator = m_cultureInfo.NumberFormat.NumberDecimalSeparator;
                 m_cultureInfo.NumberFormat.NumberGroupSeparator = "";
                 m_cultureInfo.NumberFormat.NumberDecimalSeparator = decimalSeparator;

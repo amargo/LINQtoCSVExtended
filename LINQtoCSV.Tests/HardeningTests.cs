@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -48,6 +49,32 @@ namespace LINQtoCSV.Tests
 
             WithCurrentCulture(CultureInfo.InvariantCulture, () =>
                 AssertWrite(rows, description, "Name;Amount;Ratio;Count\n" + expectedRow + "\n"));
+        }
+
+        [TestMethod]
+        public void UseThousandsSeparatorFalse_DoesNotMutateCurrentCulture()
+        {
+            var current = new CultureInfo("en-US");
+            WithCurrentCulture(current, () =>
+            {
+                var description = new CsvFileDescription { UseThousandsSeparator = false };
+
+                Assert.AreEqual(",", current.NumberFormat.NumberGroupSeparator);
+                Assert.AreEqual(string.Empty, description.FileCultureInfo.NumberFormat.NumberGroupSeparator);
+                Assert.AreEqual(".", description.FileCultureInfo.NumberFormat.NumberDecimalSeparator);
+            });
+        }
+
+        [TestMethod]
+        public void UseThousandsSeparatorFalse_WorksWithReadOnlyCurrentCulture()
+        {
+            var current = CultureInfo.ReadOnly(new CultureInfo("en-US"));
+            WithCurrentCulture(current, () =>
+            {
+                var description = new CsvFileDescription { UseThousandsSeparator = false };
+
+                Assert.AreEqual(string.Empty, description.FileCultureInfo.NumberFormat.NumberGroupSeparator);
+            });
         }
     }
 }
