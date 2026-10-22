@@ -15,14 +15,14 @@ namespace LINQtoCSV
         /// 
         /// <summary>
         /// Reads the comma separated values from a stream or file.
-        /// Returns the data into an IEnumerable<T> that can be used for LINQ queries.
+        /// Returns the data into an IEnumerable&lt;T&gt; that can be used for LINQ queries.
         /// 
         /// The stream or file will be closed after the last line has been processed.
         /// Because the library implements deferred reading (using Yield Return), this may not happen
         /// for a while.
         /// </summary>
         /// <typeparam name="T">
-        /// The records in the returned IEnumerable<T> will be of this type.
+        /// The records in the returned IEnumerable&lt;T&gt; will be of this type.
         /// </typeparam>
         /// <param name="stream">
         /// The data will be read from this stream.
